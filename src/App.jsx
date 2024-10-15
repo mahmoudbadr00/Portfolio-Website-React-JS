@@ -14,7 +14,6 @@ import Contact from "./Components/contact";
 import Footer from "./Components/footer";
 
 function App() {
-
   const [them, setThem] = useState("light");
   const theme = createTheme({
     typography: {
@@ -28,9 +27,16 @@ function App() {
     },
     palette: {
       mode: them,
+      background: {
+        default: them === "light" ? "#f9f9f9" : blueGrey[900], 
+        paper: them === "light" ? "#fff" : blueGrey[800],
+      },
+      text: {
+        primary: them === "light" ? "#000" : "#fff", 
+        secondary: them === "light" ? "#555" : "#ccc",
+      },
     },
   });
-
   const toggleThem = () => {
     setThem(them === "light" ? "dark" : "light");
     theme.palette.mode = them;
