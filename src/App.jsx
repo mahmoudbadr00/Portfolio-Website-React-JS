@@ -10,7 +10,7 @@ import Navbar from "./Components/navPar";
 import HomePage from "./pages/HomePage";
 import Projects from "./pages/Projects";
 import About from "./pages/about";
-import Contact from "./pages/Contact";
+import Contact from "./pages/contact";
 import Footer from "./Components/footer";
 import ScrollToTop from "./Components/ScrollToTop";
 
