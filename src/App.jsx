@@ -1,75 +1,65 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavPar from "./Components/navPar"
 import { useState } from "react";
 import {
-  Stack,
   createTheme,
   ThemeProvider,
   CssBaseline,
 } from "@mui/material";
-import { blueGrey} from "@mui/material/colors";
-import Body from "./Components/body";
-import About from "./Components/about";
-import Contact from "./Components/contact";
+import { blueGrey } from "@mui/material/colors";
+import Navbar from "./Components/navPar";
+import HomePage from "./pages/HomePage";
+import Projects from "./pages/Projects";
+import About from "./pages/about";
+import Contact from "./pages/Contact";
 import Footer from "./Components/footer";
+import ScrollToTop from "./Components/ScrollToTop";
 
 function App() {
-  const [them, setThem] = useState("light");
-  const theme = createTheme({
+  const [theme, setTheme] = useState("light");
+  
+  const themeConfig = createTheme({
     typography: {
-      fontFamily: ["Quicksand", "sans-serif"],
+      fontFamily: ["Poppins", "sans-serif"],
       h3: {
-        fontWeight: 500,
+        fontWeight: 600,
       },
       h6: {
-        fontFamily: "Quicksand",
+        fontFamily: "Poppins",
       },
     },
     palette: {
-      mode: them,
+      mode: theme,
       background: {
-        default: them === "light" ? "#f9f9f9" : blueGrey[900], 
-        paper: them === "light" ? "#fff" : blueGrey[800],
+        default: theme === "light" ? "#f9f9f9" : blueGrey[900],
+        paper: theme === "light" ? "#fff" : blueGrey[800],
       },
       text: {
-        primary: them === "light" ? "#000" : "#fff", 
-        secondary: them === "light" ? "#555" : "#ccc",
+        primary: theme === "light" ? "#000" : "#fff",
+        secondary: theme === "light" ? "#555" : "#ccc",
       },
     },
   });
-  const toggleThem = () => {
-    setThem(them === "light" ? "dark" : "light");
-    theme.palette.mode = them;
-    them == "light"
-      ? (theme.palette.background.default = blueGrey[900])
-      : (theme.palette.background.default = "#374850");
-    return them;
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === "light" ? "dark" : "light");
   };
+
   return (
     <Router>
-
-<ThemeProvider theme={theme}>
-      <CssBaseline>
-        <NavPar toggleThem={toggleThem} them={them}></NavPar>
+      <ThemeProvider theme={themeConfig}>
+        <CssBaseline />
+        <ScrollToTop />
+        <Navbar toggleTheme={toggleTheme} currentTheme={theme} />
         <Routes>
-        <Route path="/" />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-        <Stack
-          direction="column"
-          sx={{ marginTop: "8rem" }}
-          gap={15}
-          justifyContent="center"
-          flexWrap="wrap"
-        >
-          <Body></Body>
-        </Stack>
-        <Footer></Footer>
-      </CssBaseline>
-    </ThemeProvider>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </ThemeProvider>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

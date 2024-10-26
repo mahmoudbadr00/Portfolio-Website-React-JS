@@ -1,180 +1,227 @@
-import { AppBar, Toolbar, Box, Link, Button } from '@mui/material';
-import { Stack} from "@mui/material";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { styled } from '@mui/system';
-import Typography from '@mui/material/Typography';
-import { useEffect, useRef, useState } from "react";
-import cv from "./Mahmoud Badr - Frontend Developer - CV.pdf";
-import "./style.css";
-import { Link as RouterLink } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Button,
+  MenuItem,
+  useTheme
+} from '@mui/material';
+import {
+  Menu as MenuIcon,
+  Brightness4,
+  Brightness7,
+  Code as CodeIcon
+} from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
-const NavPar = ({ toggleThem, them }) => {
+const Navbar = ({ toggleTheme, currentTheme }) => {
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const theme = useTheme();
 
-  const [placeholder, setPlaceholder] = useState("");
-  const [adding, setAdding] = useState(true);
-  const [counter, setCounter] = useState(0);
-  const [addButton, setAddbutton] = useState(false);
-  const [string, setString] = useState(
-    `Hii, I'm Mahmoud Badr, a Front-End and Cross Platform Mobile Developer With React, JavaScript, Flutter and React Native with experience for more than 2 years.     `
-  );
-  const index = useRef(0);
+  const pages = [
+    { title: 'Home', path: '/' },
+    { title: 'Projects', path: '/projects' },
+    { title: 'About', path: '/about' },
+    { title: 'Contact', path: '/contact' }
+  ];
 
-  useEffect(() => {
-    function tick() {
-      if (adding && counter < 2) {
-        setPlaceholder((prev) => prev + string[index.current]);
-        index.current++;
-        if (index.current === string.length - 1) {
-          setAdding(false);
-        }
-        if (counter === 1) {
-          setCounter((pre) => pre + 1);
-        }
-      } else if (counter === 0) {
-        index.current--;
-        setPlaceholder((prev) => prev.slice(0, -1));
-        if (index.current === 0) {
-          setString(" Take a look at my CV :");
-          setAdding(true);
-          setCounter((pre) => pre + 1);
-        }
-      }
-    }
-    const intervalId = setInterval(tick, !adding ? 100 : 150);
-
-    if (counter > 1) {
-      setAddbutton(true);
-    }
-    return () => clearInterval(intervalId);
-  }, [adding]);
-
-  const [scrollY, setScrollY] = useState(0.1);
-  window.onscroll = () => {
-    window.scrollY > 97
-      ? setScrollY(0)
-      : window.scrollY < 97
-      ? setScrollY(0.1)
-      : null;
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const BackgroundImage = styled(Box)(({ theme }) => ({
-    width: '100%',
-    height: '60vh',
-    position: 'relative',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: `url(${theme === 'light' ? '/myimg2.jpg' : '/myimg3.jpg'}) no-repeat center center/cover`,
-  }));
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const navStyles = {
+    link: {
+      textDecoration: 'none',
+      color: 'inherit',
+      fontFamily: 'Poppins, sans-serif',
+      position: 'relative',
+    },
+    activeLink: {
+      color: theme.palette.primary.main,
+      fontWeight: 'bold',
+      fontFamily: 'Poppins, sans-serif',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: 0,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '100%',
+        height: '2px',
+        backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'black',
+        transition: 'width 0.3s ease',
+      }
+    },
+    button: {
+      position: 'relative',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: '10px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '0%',
+        height: '2px',
+        backgroundColor: theme.palette.mode === 'dark' ? 'white' : 'black',
+        transition: 'width 0.3s ease',
+      },
+      '&:hover::after': {
+        width: '80%',
+      }
+    },
+    themeButton: {
+      '&.MuiIconButton-root:hover': {
+        backgroundColor: 'transparent',
+      },
+      '&.MuiIconButton-root:focus': {
+        backgroundColor: 'transparent',
+      },
+    }
+  };
 
   return (
-    <>
-      <Box>
-        <BackgroundImage theme={them}>
-          <AppBar
+    <AppBar position="sticky" color="default">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+
+          <CodeIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
             sx={{
-              marginTop: scrollY + "rem",
-              backgroundColor: scrollY ? "transparent" : "black",
-              color: "white",
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontWeight: 700,
+              letterSpacing: '.1rem',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
-            <Toolbar>
-              <Stack
-                spacing={1.5}
-                direction="row"
-                display="flex"
-                justifyContent="space-around"
-                alignItems="center"
-                sx={{
-                  width: "100%",
-                  margin: "0 auto",
-                  position: "relative",
-                }}
+            PORTFOLIO
+          </Typography>
+
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                  <NavLink
+                    to={page.path}
+                    style={({ isActive }) => ({
+                      ...navStyles.link,
+                      ...(isActive ? navStyles.activeLink : {})
+                    })}
+                  >
+                    <Typography textAlign="center">{page.title}</Typography>
+                  </NavLink>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+
+
+          <CodeIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, ml:4}} />
+          <Typography
+            variant="h5"
+            
+            sx={{
+              mr: 8,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontWeight: 700,
+              letterSpacing: '.1rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              fontSize:'small',
+              
+            }}
+          >
+            PORTFOLIO
+          </Typography>
+          
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+            {pages.map((page) => (
+              <NavLink
+                key={page.title}
+                to={page.path}
+                style={({ isActive }) => ({
+                  ...navStyles.link,
+                  ...(isActive ? navStyles.activeLink : {})
+                })}
               >
-                <Link component={RouterLink} to="/" color="inherit" sx={{ mx: 2, fontWeight: 'bold', textDecoration:"none" }}>Home</Link>
-                <Link component={RouterLink} to="/about" color="inherit" sx={{ mx: 2, fontWeight: 'bold', textDecoration:"none" }}>About</Link>
-                <Link component={RouterLink} to="/contact" color="inherit" sx={{ mx: 2, fontWeight: 'bold', textDecoration:"none" }}>Contact</Link>
-              </Stack>
-              <Stack direction="row" sx={{ width: '10%' }}>
-                <Brightness7Icon />
-                <input
-                  type="checkbox"
-                  onChange={() => toggleThem()}
-                  className="checkbox"
-                  id="checkbox"
-                />
-                <label
-                  htmlFor="checkbox"
-                  className="checkbox-label"
-                  style={{
-                    backgroundColor: them === "light" ? "#455a64" : "#90a4ae",
+                <Button
+                  sx={{ 
+                    my: 2, 
+                    color: 'inherit', 
+                    display: 'block', 
+                    mx: 1,
+                    ...navStyles.button
                   }}
                 >
-                  <i className="fas fa-moon" />
-                  <i className="fas fa-sun" />
-                  <span className="ball" />
-                </label>
-                <Brightness4Icon />
-              </Stack>
-            </Toolbar>
-          </AppBar>
-        </BackgroundImage>
-        <Typography
-        variant="h2"
-        color='primary'
-        sx={{
-          textAlign: "center",
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: '0',
-        }}
-      >
-        Mahmoud Badr - Frontend Developer
-      </Typography>
-        <Box 
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginTop: '0',
-          }}
-        >
-          <Typography
-            component="h2"
-            align="center"
-            sx={{
-              width: "80%",
-              fontFamily: "Quicksand",
-              fontSize: {
-                sm: "1.8rem",
-                md: "2.3rem",
-                lg: "2.5rem",
-                xl: "2.6rem",
-              },
-            }}
-          >
-            {placeholder}
-          </Typography>
-          {addButton && (
-            <a style={{display: 'flex', flexDirection: 'column',
-            alignItems: 'center' , textDecoration:'none' }} href={cv} download="Mahmoud Badr - Frontend Developer - CV">
-              <Button
-                variant="contained"
-                size="small"
-                style={{ background: "grey", margin: '1rem' , width: '90%' }}
-              >
-                My CV
-              </Button>
-            </a>
-          )}
-        </Box>
-      </Box>
-    </>
+                  {page.title}
+                </Button>
+              </NavLink>
+            ))}
+          </Box>
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+          <Box sx={{width:'100%', display: { xs: 'none', md: 'flex' }}}><Typography>         </Typography></Box>
+          <Box sx={{ flexGrow: 0}}>
+            <IconButton 
+              onClick={toggleTheme} 
+              color="inherit"
+              backgroundColor="transparent"
+              sx={navStyles.themeButton}
+              style={{display:'flex', justifyContent:'end' ,width:'40px'}}
+            >
+              {currentTheme === 'dark' ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-}
+};
 
-export default NavPar;
+export default Navbar;
