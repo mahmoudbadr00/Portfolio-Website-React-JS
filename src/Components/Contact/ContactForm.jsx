@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
+
 import { useState } from 'react';
 import { TextField, Paper, Typography } from '@mui/material';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import emailjs from '@emailjs/browser';
 import { ContactButton } from './styles';
 
 const ContactForm = ({ onSubmitSuccess, onSubmitError }) => {
@@ -25,18 +25,27 @@ const ContactForm = ({ onSubmitSuccess, onSubmitError }) => {
     setIsSubmitting(true);
 
     try {
-      await addDoc(collection(db, 'message'), {
-        ...formData,
-        timestamp: new Date()
-      });
+      // Initialize EmailJS with your public key
+      emailjs.init('R-Sa7jYjYGykIePWP');
+
+      // Send email using EmailJS
+      await emailjs.send(
+        'service_farmc7h',  // Service ID
+        'template_zte2w79', // Template ID
+        {
+          from_name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          to_name: 'Mahmoud Badr' // Replace with your name
+        }
+      );
       
       onSubmitSuccess();
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Error adding document: ', error);
+      console.error('Error sending email: ', error);
       onSubmitError();
     }
-
     setIsSubmitting(false);
   };
 
