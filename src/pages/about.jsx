@@ -1,5 +1,6 @@
 import { Box, Container, Typography, Grid, Paper, Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { motion } from 'framer-motion';
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -21,6 +22,11 @@ const About = () => {
   return (
     <Box sx={{ pt: 10, pb: 8 }}>
       <Container>
+      <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
         <Typography
           variant="h2"
           textAlign="center"
@@ -29,9 +35,14 @@ const About = () => {
         >
           About Me
         </Typography>
-
+        </motion.div>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
+          <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
             <StyledPaper elevation={3}>
               <Typography variant="h5" fontWeight="bold" gutterBottom>
                 Who I Am
@@ -48,9 +59,15 @@ const About = () => {
                 working on e-learning platforms, mobile applications, and various web-based solutions.
               </Typography>
             </StyledPaper>
+            </motion.div>
           </Grid>
 
           <Grid item xs={12} md={6}>
+          <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
             <StyledPaper elevation={3}>
               <Typography variant="h5" fontWeight="bold" gutterBottom>
                 What I Do
@@ -71,9 +88,15 @@ const About = () => {
                 • Optimize application performance and maintain code quality
               </Typography>
             </StyledPaper>
+            </motion.div>
           </Grid>
 
           <Grid item xs={12}>
+          <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
             <StyledPaper elevation={3}>
               <Typography variant="h5" fontWeight="bold" gutterBottom>
                 Skills & Technologies
@@ -103,6 +126,7 @@ const About = () => {
                 </Box>
               ))}
             </StyledPaper>
+            </motion.div>
           </Grid>
         </Grid>
       </Container>

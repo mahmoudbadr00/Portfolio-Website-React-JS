@@ -101,6 +101,7 @@ const HomePage = () => {
           <Typography
             variant="h2"
             sx={{
+              fontSize:{sm:60, xs:40},
               fontWeight: 700,
               marginBottom: 2,
               textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
@@ -111,6 +112,7 @@ const HomePage = () => {
           <Typography
             variant="h4"
             sx={{
+              fontSize:{sm:35, xs:20},
               fontWeight: 500,
               marginBottom: 4,
               textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
@@ -121,6 +123,7 @@ const HomePage = () => {
           <Typography
             variant="h6"
             sx={{
+              fontSize:{sm:28, xs:18},
               maxWidth: '800px',
               margin: '0 auto',
               minHeight: '100px',

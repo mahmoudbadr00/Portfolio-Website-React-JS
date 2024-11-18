@@ -21,9 +21,8 @@ const Projects = () => {
             sx={{ 
               mb: 6, 
               mt: 4,
-              background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+              background: 'linear-gradient(45deg, #00000 30%, #00000 90%)',
               WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
             }}
           >
             My Projects

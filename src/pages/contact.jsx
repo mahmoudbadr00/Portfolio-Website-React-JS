@@ -3,6 +3,7 @@ import { Box, Container, Typography, Grid, Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import ContactForm from '../Components/Contact/ContactForm';
 import SocialLinks from '../Components/Contact/SocialLinks';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -31,6 +32,11 @@ const Contact = () => {
   return (
     <Box sx={{ pt: 10, pb: 8 }}>
       <Container>
+      <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
         <Typography
           variant="h2"
           textAlign="center"
@@ -39,17 +45,29 @@ const Contact = () => {
         >
           Contact Me
         </Typography>
-
+        </motion.div>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
-            <ContactForm 
-              onSubmitSuccess={handleSubmitSuccess}
-              onSubmitError={handleSubmitError}
-            />
+            <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+              <ContactForm 
+                onSubmitSuccess={handleSubmitSuccess}
+                onSubmitError={handleSubmitError}
+              />
+            </motion.div>
           </Grid>
 
           <Grid item xs={12} md={6}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <SocialLinks />
+            </motion.div>
           </Grid>
         </Grid>
 
