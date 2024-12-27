@@ -80,6 +80,14 @@ export const projectData = [
       technologies: ['React', 'Matrial UI']
     },
     {
+      title: 'Simple Music Player',
+      description: 'It was one of the required projects in CodeAlpha\'s training, designed in HTML, CSS and JavaScript.',
+      imgPath: '/musicPlayer.png',
+      gitHubLink: 'https://github.com/mahmoudbadr00/CodeAlpha_Music_Player',
+      demoLink:'https://music-player-by-badr.vercel.app/',
+      technologies: ['JavaScript']
+    },
+    {
       title: 'TIK TAK TOE App',
       description: 'A X/O game developed in Flutter.',
       imgPath: '/xo.PNG',
